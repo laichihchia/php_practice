@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        const myPromise = (a) => {
+            const n = Math.floor(Math.random() * 500);
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve({ a, n });
+                }, n);
+            })
+        }
+
+        //    // async, await
+        //     async function f(){
+        //         // 看起來同步 實際非同步
+        //         console.log(1);
+        //         console.log(await myPromise(1));
+        //         console.log(2);
+        //         console.log(await myPromise(2));
+        //         console.log(3);
+        //         console.log(await myPromise(3));
+        //     }
+        //     console.log('a');
+        //     f(); // 非同步呼叫, 回傳值為 Promise 物件 可接 .then, .catch 使用
+        //     console.log('b');
+
+
+        // 兩個再包一層 async await 一樣可以顯示同步操作的效果
+        (async () => {
+            await(async () => {
+                for (let i = 0; i < 10; i++) {
+                    const r = await myPromise(i);
+                    console.log('a:', r);
+                }
+            })();
+            await(async () => {
+                for (let i = 0; i < 10; i++) {
+                    const r = await myPromise(i);
+                    console.log('b:', r);
+                }
+            })();
+        })();
+
+
+        // 分開兩個獨立async await 各自非同步操作
+        // (async ()=>{
+        //     for (let i = 0; i < 10; i++) {
+        //         const r = await myPromise(i);
+        //         console.log('a:',r);
+        //     }
+        // })();
+        // (async ()=>{
+        //     for (let i = 0; i < 10; i++) {
+        //         const r = await myPromise(i);
+        //         console.log('b:',r);
+        //     }
+        // })();
+    </script>
+</body>
+
+</html>

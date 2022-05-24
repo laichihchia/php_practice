@@ -1,0 +1,22 @@
+
+
+
+
+
+
+GET http://localhost/php/practice/get_form.php
+
+
+###
+
+GET http://localhost/php/practice/get_form.php?account=Nathan&password=112233
+
+
+###
+
+POST http://localhost/php/practice/post_form.php
+Content-Type: application/x-www-form-urlencoded
+
+account=NathanLai&password=11223344
+
+###
