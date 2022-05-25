@@ -49,7 +49,7 @@ if ($totalRows > 0) {
         <tbody>
             <?php foreach ($rows as $r) : ?>
                 <tr>
-                    <td><a href=""><i class="fa-solid fa-trash-can"></i></a></td>
+                    <td><a href="javascript:" onclick="trashCanClick(event);return false"><i class="fa-solid fa-trash-can"></i></a></td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['name'] ?></td>
                     <td><?= $r['mobile'] ?></td>
@@ -101,4 +101,13 @@ if ($totalRows > 0) {
 
 </div>
 <?php include __DIR__ . '/parts/script.php' ?>
+<script>
+function trashCanClick(event){
+    // console.log(event.currentTarget);
+    const a_tag = event.currentTarget;
+    const tr = a_tag.closest('tr');
+    console.log(tr);
+    tr.remove();
+}
+</script>
 <?php include __DIR__ . '/parts/html-foot.php' ?>
