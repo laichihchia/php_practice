@@ -4,6 +4,14 @@ $title = '新增通訊錄';
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
+<style>
+    .form-control.red{
+        border: 1px solid red;
+    }
+    .form-text.red{
+        color: red;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -15,7 +23,7 @@ $title = '新增通訊錄';
                         <div class="mb-3">
                             <label for="name" class="form-label">* name</label>
                             <input type="text" class="form-control" id="name"  name="name" required>
-                            <div class="form-text"></div>
+                            <div class="form-text">123</div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">email</label>
@@ -58,15 +66,18 @@ $title = '新增通訊錄';
         // TODO 欄位檢查, 前端的檢查
         let isPass = true;
         if(name_f.value.length < 2){
-            alert("姓名至少兩個字");
+            // alert("姓名至少兩個字");
+            name_f.classList.add('red');
+            name_f.nextElementSibling.classList.add('red');//兩種寫法
+            // name_f.closest('.mv-3').querySelector('.form-text').classList.add('.red');
             isPass = false;
         }
         if(email_f.value  &&  !email_re.test(email_f.value)){
-            alert("email 格式錯誤");
+            // alert("email 格式錯誤");
             isPass = false;
         }
         if(mobile_f.value  &&  !mobile_re.test(mobile_f.value)){
-            alert("手機格式錯誤");
+            // alert("手機格式錯誤");
             isPass = false;
         }
         if(!isPass){

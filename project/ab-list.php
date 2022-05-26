@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/parts/connect_db.php';
 $pageName = 'ab-list';
-$title = '通訊錄列表';
+$title = "資訊列表 - Nathan's practice";
 // 用戶要看的頁數
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $perPage = 20; //每一頁有幾筆

@@ -4,15 +4,14 @@ if (!isset($pageName)) {
 }
 ?>
 <style>
-    .active {
-        background-color: #00f;
+    .navbar .navbar-nav .nav-link.active{
+        background-color: #555;
         color: white;
         font-weight: 600;
-        border-radius: 5px;
+        border-radius: 10px;
+        opacity: 0.8;
     }
-    .active>a{
-        color: white;
-    }
+
 </style>
 
 
@@ -26,13 +25,13 @@ if (!isset($pageName)) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link <?=$pageName == 'index'?'active':''?>" href="index_.php">Home</a>
+                        <a class="nav-link <?=$pageName == 'index' ? 'active':''?>" href="index_.php">Home</a>
                     </li>
-                    <li class="nav-item <?=$pageName == 'ab-list'?'active':''?>">
-                        <a class="nav-link " href="ab-list.php">ab-list</a>
+                    <li class="nav-item ">
+                        <a class="nav-link <?=$pageName == 'ab-list'?'active':''?>" href="ab-list.php">ab-list</a>
                     </li>
-                    <li class="nav-item <?=$pageName == 'ab-add'?'active':''?>">
-                        <a class="nav-link " href="ab-add.php">add-list</a>
+                    <li class="nav-item ">
+                        <a class="nav-link <?=$pageName == 'ab-add'?'active':''?>" href="ab-add.php">add-list</a>
                     </li>
                 </ul>
             </div>
