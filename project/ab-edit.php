@@ -1,6 +1,23 @@
 <?php require __DIR__ . '/parts/connect_db.php';
-$pageName = 'ab-add';
-$title = '新增通訊錄';
+$pageName = 'ab-edit';
+$title = '編輯通訊錄';
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+
+if(empty($sid)){
+    header("Location: ab-list.php");
+    exit;
+};
+
+$row = $pdo -> query("SELECT * FROM address_book WHERE sid=$sid")->fetch();
+
+if(empty($row)){
+    header("Location: ab-list.php");
+    exit;
+};
+
+
+
+
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
@@ -18,38 +35,42 @@ $title = '新增通訊錄';
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">新增資料</h5>
+                    <h5 class="card-title">編輯資料</h5>
                     <form name="form1" onsubmit="sendData(); return false;" novalidate>
+                        <input type="hidden" name="sid" value="<?=$row['sid']?>">
 
                         <div class="mb-3">
                             <label for="name" class="form-label">* name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" required
+                            value="<?=htmlentities($row['name'])?> ">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" value="<?=$row['email']?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">mobile</label>
-                            <input type="mobile" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}">
+                            <input type="mobile" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}" value="<?=$row['mobile']?>" >
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birthday" class="form-label">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday">
+                            <input type="date" class="form-control" id="birthday" name="birthday" value="<?=$row['birthday']?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
+                            <textarea class="form-control" name="address" id="address" cols="30" rows="3">
+                            <?=$row['address']?>
+                            </textarea>
                             <div class="form-text"></div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">edit</button>
                     </form>
                     <div id="info-bar" style="display: none;" class="alert alert-success" role="alert">
-                        資料新增成功
+                        資料編輯成功
                     </div>
                 </div>
             </div>
@@ -58,6 +79,9 @@ $title = '新增通訊錄';
 </div>
 <?php include __DIR__ . '/parts/script.php' ?>
 <script>
+    const row = <?=json_encode($row,JSON_UNESCAPED_UNICODE);?>
+
+
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
     const info_bar = document.querySelector('#info-bar');
@@ -113,7 +137,7 @@ $title = '新增通訊錄';
 
         const fd = new FormData(document.form1);
 
-        const r = await fetch('ab-add-api.php', {
+        const r = await fetch('ab-edit-api.php', {
             method: 'POST',
             body: fd,
         });
@@ -123,14 +147,14 @@ $title = '新增通訊錄';
         if(result.success){
             info_bar.classList.remove('alert-danger');
             info_bar.classList.add('alert-success');
-            info_bar.innerText = '新增成功';
+            info_bar.innerText = '修改成功';
             setTimeout(() => {
                 location.href = 'ab-list.php'; // 跳轉到列表
             }, 3000);
         }else{
             info_bar.classList.remove('alert-success');
             info_bar.classList.add('alert-danger');
-            info_bar.innerText = result.error || '新增失敗';
+            info_bar.innerText = result.error || '修改失敗';
         }
     }
 </script>

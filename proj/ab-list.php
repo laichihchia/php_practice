@@ -43,23 +43,35 @@ include __DIR__ . '/parts/html-head.php'; ?>
     <table class="table table-success table-striped">
         <thead>
             <tr>
+                <th>
+                    <a style="color: #000;" href=""><i class="fa-solid fa-recycle"></i></a>
+                </th>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Mobile</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Birthday</th>
                 <th scope="col">Address</th>
+                <th>
+                    <a style="color: #000;" href=""><i class="fa-solid fa-pen-nib"></i></a>
+                </th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($rows as $r) : ?>
                 <tr>
+                    <td>
+                        <a style="color: #888;" href=""><i class="fa-solid fa-recycle"></i></a>
+                    </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['name'] ?></td>
                     <td><?= $r['mobile'] ?></td>
                     <td><?= $r['email'] ?></td>
                     <td><?= $r['birthday'] ?></td>
                     <td><?= $r['address'] ?></td>
+                    <td>
+                        <a style="color: #888;" href=""><i class="fa-solid fa-pen-nib"></i></a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
