@@ -31,6 +31,9 @@ if(!isset($pageName)){
                     <li class="nav-item">
                         <a class="nav-link <?=$pageName == 'ab-list' ? 'active':''?>" href="ab-list.php">List</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?=$pageName == 'ab-add' ? 'active':''?>" href="ab-add.php">Add</a>
+                    </li>
                 </ul>
             </div>
         </div>

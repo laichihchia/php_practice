@@ -40,17 +40,11 @@ include __DIR__ . '/parts/html-head.php'; ?>
 <?php include __DIR__ . '/parts/navbar.php'; ?>
 
 <div class="container">
-    <button onclick="delete_select()" class="btn btn-danger">Delete Select</button>
     <table class="table table-success table-striped">
         <thead>
             <tr>
                 <th>
-                    <div class="form-check">
-                        <input class="form-check-input totalCheck" type="checkbox" value="" id="flexCheckDefault" name="all" onclick="check_all(this,'c')">
-                    </div>
-                </th>
-                <th>
-                    <i class="fa-solid fa-recycle"></i>
+                    <a style="color: #000;" ><i class="fa-solid fa-recycle"></i></a>
                 </th>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
@@ -67,25 +61,16 @@ include __DIR__ . '/parts/html-head.php'; ?>
             <?php foreach ($rows as $r) : ?>
                 <tr>
                     <td>
-                        <div class="form-check">
-                            <input class="form-check-input singleCheck" type="checkbox" value="<?= $r['sid'] ?>" id="singleSelect" name="c">
-                        </div>
-                    </td>
-                    <td>
-                        <?php
-                        // confirm 確認的寫法
-                        /*<a style="color: #888;" href="ab-delete.php?sid=<?=$r['sid']?>" onclick="return confirm('確定要刪除編號<?=$r['sid']?>的資料嗎?')"><i class="fa-solid fa-recycle"></i></a>
-                        */ ?>
-                        <a style="color: #888;" href="javascript:delete_it(<?= $r['sid'] ?>)"><i class="fa-solid fa-recycle"></i></a>
+                        <a href="javascript:" onclick="trashCanClick(event);return false;" style="color: #888;"><i class="fa-solid fa-recycle"></i></a>
                     </td>
                     <td><?= $r['sid'] ?></td>
-                    <td><?= htmlentities($r['name']) ?></td>
+                    <td><?= $r['name'] ?></td>
                     <td><?= $r['email'] ?></td>
                     <td><?= $r['mobile'] ?></td>
                     <td><?= $r['birthday'] ?></td>
-                    <td><?= htmlentities($r['address']) ?></td>
+                    <td><?= $r['address'] ?></td>
                     <td>
-                        <a style="color: #888;" href="ab-edit.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-pen-nib"></i></a>
+                        <a style="color: #888;" href=""><i class="fa-solid fa-pen-nib"></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -120,34 +105,12 @@ include __DIR__ . '/parts/html-head.php'; ?>
 </div>
 <?php include __DIR__ . '/parts/scripts.php'; ?>
 <script>
-    function delete_it(sid) {
-        if (confirm(`確定要刪除編號${sid}的資料嗎?`)) {
-            location.href = `ab-delete.php?sid=${sid}`;
-        }
-    }
-    // 全選checkbox同步設定
-    function check_all(obj, cName) {
-        const allCheck = document.getElementsByName(cName);
-        for (let i = 0; i < allCheck.length; i++) {
-            allCheck[i].checked = obj.checked;
-        }
-    }
-    const singleSelect = document.querySelectorAll('#singleSelect');
-    const select_ar = [];
-
-    async function delete_select() {
-        for (let i of singleSelect) {
-            if (i.checked) {
-                select_ar.push(i.value);
-            }
-        }
-        console.log(select_ar);
-        // const r = await fetch('ab-delete-all.php', {
-        //     method: 'GET',
-        // });
-        // const result = await r.json();
-
-        // console.log(result);
+    function trashCanClick(event){
+        // console.log(event.currentTarget);
+        // console.log(event.target);
+        const a_tag = event.currentTarget;
+        const tr = a_tag.closest('tr');
+        tr.remove();
     }
 </script>
 <?php include __DIR__ . '/parts/html-foot.php'; ?>

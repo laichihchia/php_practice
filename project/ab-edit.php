@@ -62,9 +62,7 @@ if(empty($row)){
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3">
-                            <?=$row['address']?>
-                            </textarea>
+                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"><?=$row['address']?></textarea>
                             <div class="form-text"></div>
                         </div>
                         <button type="submit" class="btn btn-primary">edit</button>
