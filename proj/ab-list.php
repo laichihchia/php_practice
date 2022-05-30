@@ -133,21 +133,18 @@ include __DIR__ . '/parts/html-head.php'; ?>
         }
     }
     const singleSelect = document.querySelectorAll('#singleSelect');
-    
+
     async function delete_select() {
         const select_ar = [];
         for (let i of singleSelect) {
             if (i.checked) {
-                select_ar.push(i.value);
+                select_ar.push(Number(i.value));
             }
         }
-        console.log(select_ar);
-        const r = await fetch('ab-delete-all.php', {
-            method: 'GET',
-        });
-        const result = await r.json();
-
-        console.log(result);
+        // console.log(select_ar);
+        if(confirm(`確定要刪除編號為${select_ar}的資料嗎`)){
+            location.href = `ab-delete-all-api.php?sid=${select_ar}`;
+        }
     }
 </script>
 <?php include __DIR__ . '/parts/html-foot.php'; ?>

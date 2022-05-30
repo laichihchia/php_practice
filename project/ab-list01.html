@@ -103,9 +103,10 @@
                 tbody.innerHTML = html;
             }
 
-            fetch("ab-list-api.php?page=5")
+            fetch("ab-list-api.php?page=1")
                 .then((r) => r.json())
                 .then((obj) => {
+                    console.log(obj);
                     data = obj;
                     renderTable();
                     renderPagination();
