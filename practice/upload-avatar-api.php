@@ -16,6 +16,11 @@ $output = [
     'error' => '',
 ];
 
+if(empty($_FILES['avatar'])){
+    $output['error'] = '沒有上傳檔案';
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
+    exit;
+}
 if(empty($extMap[$_FILES['avatar']['type']])){
     $output['error'] = '檔案類型錯誤';
     echo json_encode($output,JSON_UNESCAPED_UNICODE);

@@ -133,21 +133,21 @@ include __DIR__ . '/parts/html-head.php'; ?>
         }
     }
     const singleSelect = document.querySelectorAll('#singleSelect');
-    const select_ar = [];
-
+    
     async function delete_select() {
+        const select_ar = [];
         for (let i of singleSelect) {
             if (i.checked) {
                 select_ar.push(i.value);
             }
         }
         console.log(select_ar);
-        // const r = await fetch('ab-delete-all.php', {
-        //     method: 'GET',
-        // });
-        // const result = await r.json();
+        const r = await fetch('ab-delete-all.php', {
+            method: 'GET',
+        });
+        const result = await r.json();
 
-        // console.log(result);
+        console.log(result);
     }
 </script>
 <?php include __DIR__ . '/parts/html-foot.php'; ?>
